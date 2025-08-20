@@ -23,10 +23,19 @@ function SetCarToCompare(el, carClass) {
    
     if(carClass instanceof Car){       
         if(el.checked){
-                
-            
+            if(carArr.length >= 2){
+                el.checked = false;
+                alert("Você só pode verificar 2 carros por vez!")
+                return
+            }
+            if(GetCarArrPosition(carArr, carClass) === -1){
+                carArr.push(carClass)
+            }
         } else {
-          
+          const index = GetCarArrPosition(carArr, carClass);
+          if(index !== -1){
+            carArr.splice(index, 1)
+          }
         } 
     } else {
         throw "You need set a Car Class";
